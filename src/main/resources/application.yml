@@ -1,1 +1,46 @@
-spring.application.name=E-commerce
+spring:
+  application:
+    name: E-commerce
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+      database: 0
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# 로깅 설정
+logging:
+  level:
+    com.example: DEBUG
+    org.springframework.security: DEBUG
+    # 인증(Authentication) 관련 로그
+    org.springframework.security.authentication: DEBUG
+
+    # 인가(Authorization) 관련 로그 (여기가 핵심!)
+    org.springframework.security.authorization: TRACE
+    org.springframework.security.web.access: TRACE
+
+    # 필터 체인 실행 로그
+    org.springframework.security.web.FilterChainProxy: DEBUG
