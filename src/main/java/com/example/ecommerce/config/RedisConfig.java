@@ -15,6 +15,5 @@ public class RedisConfig {
         script.setLocation(new ClassPathResource("lua/coupon_issue.lua"));
         script.setResultType(Long.class);
         return script;
-
     }
 }
