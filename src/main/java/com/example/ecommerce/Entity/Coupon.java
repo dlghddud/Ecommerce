@@ -1,16 +1,27 @@
-package com.example.ecommerce.Entity;
+package com.example.ecommerce.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
-import java.security.Timestamp;
-
+@Entity
 @Getter
-@Setter
+@NoArgsConstructor
 public class Coupon {
-  private long id;
-  private String name;
-  private long totalQuantity;
-  private Timestamp createdAt;
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  private String name;
+
+  private Integer totalQuantity;
+
+  public Coupon(String name, Integer totalQuantity) {
+    this.name = name;
+    this.totalQuantity = totalQuantity;
+  }
 }
