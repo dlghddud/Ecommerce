@@ -1,6 +1,6 @@
 package com.example.ecommerce.service;
 
-import com.example.ecommerce.entity.CouponIssued;
+import com.example.ecommerce.Entity.CouponIssued;
 import com.example.ecommerce.repository.CouponIssuedRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;

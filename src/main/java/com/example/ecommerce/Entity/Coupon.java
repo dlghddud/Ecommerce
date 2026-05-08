@@ -1,4 +1,4 @@
-package com.example.ecommerce.entity;
+package com.example.ecommerce.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
