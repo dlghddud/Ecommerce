@@ -33,6 +33,10 @@ public class CouponIssued {
     public CouponIssued(Long couponId, Long userId) {
         this.couponId = couponId;
         this.userId = userId;
+    }
+
+    @PrePersist
+    public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
 }

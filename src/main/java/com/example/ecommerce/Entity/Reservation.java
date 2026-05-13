@@ -19,10 +19,10 @@ public class Reservation {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "seat_id")
+    @Column(name = "seat_id", nullable = false)
     private Long seatId;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
     @Column(name = "created_at")
@@ -31,6 +31,10 @@ public class Reservation {
     public Reservation(Long seatId, Long userId) {
         this.seatId = seatId;
         this.userId = userId;
+    }
+
+    @PrePersist
+    public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
 
