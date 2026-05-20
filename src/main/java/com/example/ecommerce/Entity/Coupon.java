@@ -1,9 +1,6 @@
-package com.example.ecommerce.entity;
+package com.example.ecommerce.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,9 +16,17 @@ public class Coupon {
   private String name;
 
   private Integer totalQuantity;
+  
+  private Long discountAmount;
 
-  public Coupon(String name, Integer totalQuantity) {
+  public Coupon(String name, Integer totalQuantity, Long discountAmount) {
     this.name = name;
     this.totalQuantity = totalQuantity;
+    this.discountAmount = discountAmount;
+  }
+  
+  // 수량을 업데이트하는 메서드 추가
+  public void updateTotalQuantity(int newQuantity) {
+    this.totalQuantity = newQuantity;
   }
 }
