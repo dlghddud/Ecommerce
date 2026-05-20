@@ -21,9 +21,29 @@ public class Seat {
     @Column(name = "seat_number", length = 50)
     private String seatNumber;
 
+    @Column(name = "price")
+    private Long price = 10000L; // 기본 가격 설정
+
     @ColumnDefault("'AVAILABLE'")
     @Column(name = "status", length = 20)
     @Enumerated(EnumType.STRING)
-    private String status;
+    private SeatStatus status = SeatStatus.AVAILABLE;
 
+    public enum SeatStatus {
+        AVAILABLE,
+        RESERVED,
+        SOLD
+    }
+    
+    public void reserve() {
+        this.status = SeatStatus.RESERVED;
+    }
+    
+    public void sold() {
+        this.status = SeatStatus.SOLD;
+    }
+    
+    public void cancel() {
+        this.status = SeatStatus.AVAILABLE;
+    }
 }
