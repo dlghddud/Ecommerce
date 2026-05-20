@@ -27,12 +27,26 @@ public class CouponIssued {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
+    // 쿠폰 사용 여부 상태 추가
+    @Column(name = "is_used", nullable = false)
+    private boolean isUsed = false;
+
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     public CouponIssued(Long couponId, Long userId) {
         this.couponId = couponId;
         this.userId = userId;
+    }
+
+    // 쿠폰 사용 처리 메서드
+    public void use() {
+        this.isUsed = true;
+    }
+    
+    // 쿠폰 복구 (결제 실패 시)
+    public void restore() {
+        this.isUsed = false;
     }
 
     @PrePersist

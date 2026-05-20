@@ -18,7 +18,7 @@ public class CouponService {
     private final RedisScript<Long> couponScript;
     private final CouponIssuedRepository couponIssuedRepository;
 
-    public String issueCoupon(Long couponId, Long userId) {
+    public CouponIssued issueCoupon(Long couponId, Long userId) {
 
         String stockKey = "coupon:stock:" + couponId;
         String issuedKey = "coupon:issued:" + couponId + ":" + userId;
@@ -31,23 +31,18 @@ public class CouponService {
         if (result == null) {
             throw new RuntimeException("Redis error");
         }
-
         if (result == -1) {
-            return "이미 발급받은 쿠폰입니다.";
+            throw new RuntimeException("이미 발급받은 쿠폰입니다.");
         }
-
         if (result == -2) {
-            return "쿠폰이 모두 소진되었습니다.";
+            throw new RuntimeException("쿠폰이 모두 소진되었습니다.");
         }
 
         // 성공 → DB 저장
         try {
-            couponIssuedRepository.save(new CouponIssued(couponId, userId));
+            return couponIssuedRepository.save(new CouponIssued(couponId, userId));
         } catch (DataIntegrityViolationException e) {
-            // 이미 발급된 경우
-            return "이미 발급된 쿠폰입니다 (DB)";
+            throw new RuntimeException("이미 발급된 쿠폰입니다 (DB)");
         }
-
-        return "쿠폰 발급 성공";
     }
 }

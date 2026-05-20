@@ -1,5 +1,6 @@
 package com.example.ecommerce.controller;
 
+import com.example.ecommerce.Entity.CouponIssued;
 import com.example.ecommerce.service.CouponService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ public class CouponController {
     private final CouponService couponService;
 
     @PostMapping("/{couponId}/issue")
-    public ResponseEntity<String> issue(
+    public ResponseEntity<CouponIssued> issue(
             @PathVariable Long couponId,
             @RequestParam Long userId
     ) {
